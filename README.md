@@ -1,6 +1,6 @@
 # Tema 3: publicación/suscripción y eventos
 
-Repositorio didáctico en Node.js para el coloquio. Un pedido publica `PedidoCreado`; un canal entrega **el mismo evento** a dos consumidores independientes: notificaciones y estadísticas. Cuatro contenedores, cero dependencias de npm. [Guion de la exposición](GUIA_COLOQUIO.md).
+Repositorio didáctico en Node.js para el coloquio. Un pedido publica `PedidoCreado`; un canal entrega **el mismo evento** a dos consumidores independientes: notificaciones y estadísticas. Cuatro contenedores, cero dependencias de npm. [Guion de la exposición](GUIA_COLOQUIO.md) · [Diagrama de secuencia (abrir en el navegador)](diagramas/pubsub-secuencia.html).
 
 ## Arquitectura
 

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Publicación/suscripción: un evento, dos consumidores",
+    "viewBox": [1080, 600],
+    "column_fit": "spread",
+    "quality_profile": "showcase"
+  },
+  "participants": [
+    { "id": "demo", "type": "external", "label": "demo.mjs", "sublabel": "cliente" },
+    { "id": "pedidos", "type": "backend", "label": "Pedidos", "sublabel": "productor :8080" },
+    { "id": "canal", "type": "messagebus", "label": "Canal", "sublabel": "distribuidor :8081" },
+    { "id": "notificaciones", "type": "backend", "label": "Notificaciones", "sublabel": "consumidor :8082" },
+    { "id": "estadisticas", "type": "backend", "label": "Estadísticas", "sublabel": "consumidor :8083" }
+  ],
+  "segments": [
+    { "from": 150, "to": 225, "label": "Crear y publicar" },
+    { "from": 235, "to": 362, "label": "Distribución" },
+    { "from": 372, "to": 470, "label": "Respuesta" }
+  ],
+  "messages": [
+    { "id": "crear", "from": "demo", "to": "pedidos", "y": 165, "label": "POST /pedidos", "variant": "emphasis" },
+    { "id": "publicar", "from": "pedidos", "to": "canal", "y": 205, "label": "publica PedidoCreado", "variant": "emphasis" },
+    { "id": "a-notif", "from": "canal", "to": "notificaciones", "y": 262, "label": "copia del evento", "variant": "default" },
+    { "id": "a-estad", "from": "canal", "to": "estadisticas", "y": 292, "label": "copia del evento", "variant": "default" },
+    { "id": "ok-notif", "from": "notificaciones", "to": "canal", "y": 320, "label": "OK · aviso registrado", "variant": "return" },
+    { "id": "ok-estad", "from": "estadisticas", "to": "canal", "y": 350, "label": "OK · total +1", "variant": "return" },
+    { "id": "entregas", "from": "canal", "to": "pedidos", "y": 392, "label": "entregas: OK, OK", "variant": "return" },
+    { "id": "respuesta", "from": "pedidos", "to": "demo", "y": 432, "label": "201 · pedido + evento", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "pedidos", "from": 160, "to": 438, "type": "backend" },
+    { "participant": "canal", "from": 200, "to": 397, "type": "messagebus" },
+    { "participant": "notificaciones", "from": 257, "to": 325, "type": "backend" },
+    { "participant": "estadisticas", "from": 287, "to": 356, "type": "backend" }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Un hecho, varias reacciones",
+      "items": [
+        "Pedidos publica PedidoCreado una sola vez",
+        "El canal entrega el mismo evento a cada consumidor"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "Bajo acoplamiento",
+      "items": [
+        "Pedidos no conoce las URLs de los consumidores",
+        "Agregar un consumidor no cambia a Pedidos"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Límite (fallo.mjs)",
+      "items": [
+        "Con Notificaciones detenido: entregas ERROR, OK",
+        "El canal no guarda ni reintenta la entrega fallida"
+      ]
+    }
+  ]
+}
