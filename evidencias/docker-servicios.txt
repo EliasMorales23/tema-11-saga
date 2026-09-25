@@ -1,0 +1,4 @@
+NAME                        IMAGE                     COMMAND                  SERVICE      CREATED          STATUS          PORTS
+tema-11-saga-inventario-1   tema-11-saga-inventario   "docker-entrypoint.s…"   inventario   16 seconds ago   Up 15 seconds   
+tema-11-saga-pagos-1        tema-11-saga-pagos        "docker-entrypoint.s…"   pagos        16 seconds ago   Up 15 seconds   
+tema-11-saga-pedidos-1      tema-11-saga-pedidos      "docker-entrypoint.s…"   pedidos      16 seconds ago   Up 15 seconds   127.0.0.1:8090->8090/tcp

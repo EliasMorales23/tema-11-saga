@@ -1,0 +1,20 @@
+pagos-1       | [pagos] escuchando puerto=8092
+inventario-1  | [inventario] escuchando puerto=8091
+pedidos-1     | [pedidos] escuchando puerto=8090
+pedidos-1     | [pedidos] af43be0f-f2db-4c9e-9586-13ee9ec6cab5: saga iniciada
+pedidos-1     | [pedidos] af43be0f-f2db-4c9e-9586-13ee9ec6cab5: 1 stock reservado
+pedidos-1     | [pedidos] af43be0f-f2db-4c9e-9586-13ee9ec6cab5: 2 pago registrado
+pedidos-1     | [pedidos] af43be0f-f2db-4c9e-9586-13ee9ec6cab5: 3 pedido CONFIRMADO
+pedidos-1     | [pedidos] 16b92759-2c1a-416d-aeab-a7bdf72fa141: saga iniciada
+pedidos-1     | [pedidos] 16b92759-2c1a-416d-aeab-a7bdf72fa141: 1 stock reservado
+pedidos-1     | [pedidos] 16b92759-2c1a-416d-aeab-a7bdf72fa141: 2 pago registrado
+pagos-1       | [pagos] cobrado af43be0f-f2db-4c9e-9586-13ee9ec6cab5
+pagos-1       | [pagos] cobrado 16b92759-2c1a-416d-aeab-a7bdf72fa141
+pagos-1       | [pagos] reembolsado 16b92759-2c1a-416d-aeab-a7bdf72fa141
+inventario-1  | [inventario] reservado af43be0f-f2db-4c9e-9586-13ee9ec6cab5; disponible=4
+pedidos-1     | [pedidos] 16b92759-2c1a-416d-aeab-a7bdf72fa141: fallo simulado al confirmar; comenzar compensación
+pedidos-1     | [pedidos] 16b92759-2c1a-416d-aeab-a7bdf72fa141: compensación reembolsar pago OK
+pedidos-1     | [pedidos] 16b92759-2c1a-416d-aeab-a7bdf72fa141: compensación liberar stock OK
+pedidos-1     | [pedidos] 16b92759-2c1a-416d-aeab-a7bdf72fa141: estado final CANCELADO
+inventario-1  | [inventario] reservado 16b92759-2c1a-416d-aeab-a7bdf72fa141; disponible=3
+inventario-1  | [inventario] liberado 16b92759-2c1a-416d-aeab-a7bdf72fa141; disponible=4

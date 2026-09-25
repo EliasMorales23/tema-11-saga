@@ -1,6 +1,6 @@
 # Tema 11: saga y transacciones distribuidas
 
-Repositorio didáctico en Node.js con tres servicios separados mediante Docker Compose: pedidos, inventario y pagos. Una compra exitosa reserva y cobra; otra falla a propósito al confirmar y ejecuta compensaciones. [Guion de exposición](GUIA_COLOQUIO.md).
+Repositorio didáctico en Node.js con tres servicios separados mediante Docker Compose: pedidos, inventario y pagos. Una compra exitosa reserva y cobra; otra falla a propósito al confirmar y ejecuta compensaciones. [Guion de exposición](GUIA_COLOQUIO.md) · [Monólogo slide por slide](MONOLOGO.md).
 
 ```mermaid
 flowchart TD
@@ -57,17 +57,17 @@ Pedidos actúa como **orquestador**: decide el orden de los pasos. Las compensac
 
 ## Evidencia de respaldo
 
-- [evidencias/ejecucion-local.log](evidencias/ejecucion-local.log): salida real de la prueba local de los procesos Node.
-- [evidencias/servicios-local.log](evidencias/servicios-local.log): orden de reserva, cobro, falla, reembolso y liberación observado localmente.
+- [evidencias/ejecucion-local.log](evidencias/ejecucion-local.log) y [evidencias/servicios-local.log](evidencias/servicios-local.log): prueba local de los procesos Node, sin Docker.
+- [evidencias/docker-servicios.txt](evidencias/docker-servicios.txt) y [evidencias/docker-logs.txt](evidencias/docker-logs.txt): salida de `docker compose ps` y `docker compose logs` de una ejecución real en contenedores.
 
-Son **logs de ejecución local, sin Docker**. Para respaldar específicamente la ejecución en contenedores, después de ensayar en su computadora guarden:
+Para regenerarlas en su computadora después de correr la demo:
 
 ```bash
 docker compose ps > evidencias/docker-servicios.txt
 docker compose logs --no-color > evidencias/docker-logs.txt
 ```
 
-Conviene guardar también una captura donde se vea el estado final de los dos pedidos o grabar un video breve. Los archivos locales permiten explicar el resultado si la demostración en vivo falla.
+Conviene guardar también una captura donde se vea el estado final de los dos pedidos o grabar un video breve como respaldo si la demostración en vivo falla.
 
 ## Qué demuestra y qué no
 
