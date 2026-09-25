@@ -1,0 +1,15 @@
+[notificaciones] [notificaciones] escuchando puerto=8082
+[notificaciones] [notificaciones] aviso registrado para pedido=39aedb42-3ec3-4120-9c67-4fb8ed75dca2
+[estadisticas] [estadisticas] escuchando puerto=8083
+[estadisticas] [estadisticas] pedido creado=39aedb42-3ec3-4120-9c67-4fb8ed75dca2; total=1
+[estadisticas] [estadisticas] pedido creado=72c490d3-7c42-4067-b186-b965fb6eab19; total=2
+[canal] [canal] escuchando puerto=8081
+[canal] [canal] recibido=PedidoCreado evento=10b6679f-8d30-4f06-b8e7-4054ef9ef7e1
+[canal] [canal] evento=10b6679f-8d30-4f06-b8e7-4054ef9ef7e1 consumidor=notificaciones estado=OK
+[canal] [canal] evento=10b6679f-8d30-4f06-b8e7-4054ef9ef7e1 consumidor=estadisticas estado=OK
+[canal] [canal] recibido=PedidoCreado evento=9b8d9af2-3398-4715-9300-a129093bb2cc
+[canal] [canal] evento=9b8d9af2-3398-4715-9300-a129093bb2cc consumidor=notificaciones estado=ERROR
+[canal] [canal] evento=9b8d9af2-3398-4715-9300-a129093bb2cc consumidor=estadisticas estado=OK
+[pedidos] [pedidos] escuchando puerto=8080
+[pedidos] [pedidos] creado=39aedb42-3ec3-4120-9c67-4fb8ed75dca2 publicado=PedidoCreado evento=10b6679f-8d30-4f06-b8e7-4054ef9ef7e1
+[pedidos] [pedidos] creado=72c490d3-7c42-4067-b186-b965fb6eab19 publicado=PedidoCreado evento=9b8d9af2-3398-4715-9300-a129093bb2cc

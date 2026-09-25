@@ -1,0 +1,53 @@
+{
+  "pedido": {
+    "id": "39aedb42-3ec3-4120-9c67-4fb8ed75dca2",
+    "email": "alumna@ejemplo.com",
+    "estado": "CREADO"
+  },
+  "evento": {
+    "id": "10b6679f-8d30-4f06-b8e7-4054ef9ef7e1",
+    "type": "PedidoCreado",
+    "pedidoId": "39aedb42-3ec3-4120-9c67-4fb8ed75dca2",
+    "email": "alumna@ejemplo.com"
+  },
+  "entregas": [
+    {
+      "consumidor": "notificaciones",
+      "estado": "OK"
+    },
+    {
+      "consumidor": "estadisticas",
+      "estado": "OK"
+    }
+  ],
+  "aviso": {
+    "eventoId": "10b6679f-8d30-4f06-b8e7-4054ef9ef7e1",
+    "pedidoId": "39aedb42-3ec3-4120-9c67-4fb8ed75dca2",
+    "texto": "Aviso para alumna@ejemplo.com"
+  },
+  "estadisticas": {
+    "antes": 0,
+    "despues": 1
+  }
+}
+VERIFICADO: el mismo evento llegó a dos consumidores independientes.
+{
+  "pedidoId": "72c490d3-7c42-4067-b186-b965fb6eab19",
+  "eventoId": "9b8d9af2-3398-4715-9300-a129093bb2cc",
+  "entregas": [
+    {
+      "consumidor": "notificaciones",
+      "estado": "ERROR"
+    },
+    {
+      "consumidor": "estadisticas",
+      "estado": "OK"
+    }
+  ],
+  "estadisticas": {
+    "antes": 1,
+    "despues": 2
+  }
+}
+VERIFICADO: estadísticas procesó el evento aunque notificaciones estaba detenido.
+LÍMITE: el canal no guarda ni reintenta la entrega fallida.

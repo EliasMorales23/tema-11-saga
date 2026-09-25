@@ -1,0 +1,38 @@
+x-app: &app
+  build: .
+  restart: unless-stopped
+
+services:
+  pedidos:
+    <<: *app
+    environment:
+      ROLE: pedidos
+      PORT: 8080
+      CANAL_URL: http://canal:8081
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      - canal
+
+  canal:
+    <<: *app
+    environment:
+      ROLE: canal
+      PORT: 8081
+      NOTIFICACIONES_URL: http://notificaciones:8082
+      ESTADISTICAS_URL: http://estadisticas:8083
+    depends_on:
+      - notificaciones
+      - estadisticas
+
+  notificaciones:
+    <<: *app
+    environment:
+      ROLE: notificaciones
+      PORT: 8082
+
+  estadisticas:
+    <<: *app
+    environment:
+      ROLE: estadisticas
+      PORT: 8083
