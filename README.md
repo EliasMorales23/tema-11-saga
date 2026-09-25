@@ -1,6 +1,6 @@
 # Tema 11: saga y transacciones distribuidas
 
-Repositorio didáctico en Node.js con tres servicios separados mediante Docker Compose: pedidos, inventario y pagos. Una compra exitosa reserva y cobra; otra falla a propósito al confirmar y ejecuta compensaciones. [Guion de exposición](GUIA_COLOQUIO.md) · [Monólogo slide por slide](MONOLOGO.md) · [Diagrama de secuencia (abrir en el navegador)](diagramas/saga-secuencia.html).
+Repositorio didáctico en Node.js con tres servicios separados mediante Docker Compose: pedidos, inventario y pagos. Una compra exitosa reserva y cobra; otra falla a propósito al confirmar y ejecuta compensaciones. [Guion de exposición](GUIA_COLOQUIO.md) · [Monólogo slide por slide](MONOLOGO.md) · Diagramas de secuencia (abrir en el navegador): [caso A](diagramas/saga-secuencia-caso-a.html) · [caso B](diagramas/saga-secuencia.html).
 
 ```mermaid
 flowchart TD

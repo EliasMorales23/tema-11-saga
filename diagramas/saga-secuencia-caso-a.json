@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Saga orquestada: caso A (compra exitosa)",
+    "viewBox": [1080, 560],
+    "column_fit": "spread",
+    "quality_profile": "showcase"
+  },
+  "participants": [
+    { "id": "demo", "type": "external", "label": "demo.mjs", "sublabel": "cliente" },
+    { "id": "pedidos", "type": "backend", "label": "Pedidos", "sublabel": "orquestador :8090" },
+    { "id": "inventario", "type": "database", "label": "Inventario", "sublabel": "stock :8091" },
+    { "id": "pagos", "type": "backend", "label": "Pagos", "sublabel": "cobros :8092" }
+  ],
+  "segments": [
+    { "from": 150, "to": 290, "label": "Avance normal" },
+    { "from": 300, "to": 335, "label": "3 · Confirmar" },
+    { "from": 345, "to": 385, "label": "Respuesta" }
+  ],
+  "messages": [
+    { "id": "crear-pedido", "from": "demo", "to": "pedidos", "y": 165, "label": "POST /pedidos", "variant": "emphasis" },
+    { "id": "reservar", "from": "pedidos", "to": "inventario", "y": 197, "label": "1 · POST /reservar", "variant": "default" },
+    { "id": "reservado", "from": "inventario", "to": "pedidos", "y": 225, "label": "reservado (stock −1)", "variant": "return" },
+    { "id": "cobrar", "from": "pedidos", "to": "pagos", "y": 253, "label": "2 · POST /cobrar", "variant": "default" },
+    { "id": "cobrado", "from": "pagos", "to": "pedidos", "y": 281, "label": "COBRADO", "variant": "return" },
+    { "id": "respuesta", "from": "pedidos", "to": "demo", "y": 358, "label": "201 · CONFIRMADO", "variant": "return", "note": "3 · pedido confirmado, sin compensaciones" }
+  ],
+  "activations": [
+    { "participant": "pedidos", "from": 160, "to": 364, "type": "backend" },
+    { "participant": "inventario", "from": 192, "to": 230, "type": "database" },
+    { "participant": "pagos", "from": 248, "to": 286, "type": "backend" }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Todo sale bien",
+      "items": [
+        "Reserva, cobro y confirmación se completan",
+        "No se ejecuta ninguna compensación"
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "Estado final",
+      "items": [
+        "Pedido CONFIRMADO, pago COBRADO",
+        "Una unidad queda reservada (stock 5 → 4)"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Ojo",
+      "items": [
+        "Pedidos igual guardó cómo deshacer cada paso",
+        "Solo lo usa si algo falla después (caso B)"
+      ]
+    }
+  ]
+}
