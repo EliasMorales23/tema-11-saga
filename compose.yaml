@@ -1,0 +1,29 @@
+x-app: &app
+  build: .
+  restart: unless-stopped
+
+services:
+  pedidos:
+    <<: *app
+    environment:
+      ROLE: pedidos
+      PORT: 8090
+      INVENTARIO_URL: http://inventario:8091
+      PAGOS_URL: http://pagos:8092
+    ports:
+      - "127.0.0.1:8090:8090"
+    depends_on:
+      - inventario
+      - pagos
+
+  inventario:
+    <<: *app
+    environment:
+      ROLE: inventario
+      PORT: 8091
+
+  pagos:
+    <<: *app
+    environment:
+      ROLE: pagos
+      PORT: 8092

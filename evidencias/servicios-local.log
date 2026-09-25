@@ -1,0 +1,20 @@
+[inventario] [inventario] escuchando puerto=8091
+[inventario] [inventario] reservado 5925abee-6da7-4122-8090-b63000ec57b9; disponible=4
+[inventario] [inventario] reservado 471aebb8-8e0f-421d-8b1e-730b140477ee; disponible=3
+[inventario] [inventario] liberado 471aebb8-8e0f-421d-8b1e-730b140477ee; disponible=4
+[pagos] [pagos] escuchando puerto=8092
+[pagos] [pagos] cobrado 5925abee-6da7-4122-8090-b63000ec57b9
+[pagos] [pagos] cobrado 471aebb8-8e0f-421d-8b1e-730b140477ee
+[pagos] [pagos] reembolsado 471aebb8-8e0f-421d-8b1e-730b140477ee
+[pedidos] [pedidos] escuchando puerto=8090
+[pedidos] [pedidos] 5925abee-6da7-4122-8090-b63000ec57b9: saga iniciada
+[pedidos] [pedidos] 5925abee-6da7-4122-8090-b63000ec57b9: 1 stock reservado
+[pedidos] [pedidos] 5925abee-6da7-4122-8090-b63000ec57b9: 2 pago registrado
+[pedidos] [pedidos] 5925abee-6da7-4122-8090-b63000ec57b9: 3 pedido CONFIRMADO
+[pedidos] [pedidos] 471aebb8-8e0f-421d-8b1e-730b140477ee: saga iniciada
+[pedidos] [pedidos] 471aebb8-8e0f-421d-8b1e-730b140477ee: 1 stock reservado
+[pedidos] [pedidos] 471aebb8-8e0f-421d-8b1e-730b140477ee: 2 pago registrado
+[pedidos] [pedidos] 471aebb8-8e0f-421d-8b1e-730b140477ee: fallo simulado al confirmar; comenzar compensación
+[pedidos] [pedidos] 471aebb8-8e0f-421d-8b1e-730b140477ee: compensación reembolsar pago OK
+[pedidos] [pedidos] 471aebb8-8e0f-421d-8b1e-730b140477ee: compensación liberar stock OK
+[pedidos] [pedidos] 471aebb8-8e0f-421d-8b1e-730b140477ee: estado final CANCELADO

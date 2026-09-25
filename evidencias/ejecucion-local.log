@@ -1,0 +1,26 @@
+CASO A: COMPRA EXITOSA
+{
+  "order": {
+    "id": "5925abee-6da7-4122-8090-b63000ec57b9",
+    "amount": 15000,
+    "status": "CONFIRMADO"
+  },
+  "stockBefore": 5,
+  "stockAfter": 4
+}
+CASO B: FALLA AL CONFIRMAR
+{
+  "order": {
+    "id": "471aebb8-8e0f-421d-8b1e-730b140477ee",
+    "amount": 20000,
+    "status": "CANCELADO"
+  },
+  "stockBefore": 4,
+  "stockAfter": 4,
+  "payment": {
+    "amount": 20000,
+    "status": "REEMBOLSADO"
+  },
+  "retainedReservation": false
+}
+VERIFICADO: la saga compensó el cobro y la reserva del pedido fallido.
