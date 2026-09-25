@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "diagram_type": "sequence",
+  "meta": {
+    "title": "Saga orquestada: caso B (falla al confirmar)",
+    "viewBox": [1080, 600],
+    "column_fit": "spread",
+    "quality_profile": "showcase"
+  },
+  "participants": [
+    { "id": "demo", "type": "external", "label": "demo.mjs", "sublabel": "cliente" },
+    { "id": "pedidos", "type": "backend", "label": "Pedidos", "sublabel": "orquestador :8090" },
+    { "id": "inventario", "type": "database", "label": "Inventario", "sublabel": "stock :8091" },
+    { "id": "pagos", "type": "backend", "label": "Pagos", "sublabel": "cobros :8092" }
+  ],
+  "segments": [
+    { "from": 150, "to": 285, "label": "Avance normal" },
+    { "from": 293, "to": 327, "label": "3 · Falla al confirmar" },
+    { "from": 335, "to": 435, "label": "Compensación" },
+    { "from": 445, "to": 480, "label": "Respuesta" }
+  ],
+  "messages": [
+    { "id": "crear-pedido", "from": "demo", "to": "pedidos", "y": 165, "label": "POST /pedidos (failConfirmation)", "variant": "emphasis" },
+    { "id": "reservar", "from": "pedidos", "to": "inventario", "y": 197, "label": "1 · POST /reservar", "variant": "default" },
+    { "id": "reservado", "from": "inventario", "to": "pedidos", "y": 225, "label": "reservado (stock −1)", "variant": "return" },
+    { "id": "cobrar", "from": "pedidos", "to": "pagos", "y": 253, "label": "2 · POST /cobrar", "variant": "default" },
+    { "id": "cobrado", "from": "pagos", "to": "pedidos", "y": 281, "label": "COBRADO", "variant": "return", "note": "3 · confirmar el pedido: falla" },
+    { "id": "reembolsar", "from": "pedidos", "to": "pagos", "y": 349, "label": "C1 · POST /reembolsar", "variant": "security" },
+    { "id": "reembolsado", "from": "pagos", "to": "pedidos", "y": 377, "label": "REEMBOLSADO", "variant": "return" },
+    { "id": "liberar", "from": "pedidos", "to": "inventario", "y": 405, "label": "C2 · POST /liberar", "variant": "security" },
+    { "id": "liberado", "from": "inventario", "to": "pedidos", "y": 433, "label": "liberado (stock +1)", "variant": "return" },
+    { "id": "respuesta", "from": "pedidos", "to": "demo", "y": 465, "label": "201 · CANCELADO", "variant": "return" }
+  ],
+  "activations": [
+    { "participant": "pedidos", "from": 160, "to": 470, "type": "backend" },
+    { "participant": "inventario", "from": 192, "to": 230, "type": "database" },
+    { "participant": "pagos", "from": 248, "to": 286, "type": "backend" },
+    { "participant": "pagos", "from": 344, "to": 382, "type": "backend" },
+    { "participant": "inventario", "from": 400, "to": 438, "type": "database" }
+  ],
+  "cards": [
+    {
+      "dot": "emerald",
+      "title": "Avance normal",
+      "items": [
+        "Pedidos reserva stock y cobra, y guarda cómo deshacer cada paso",
+        "Caso A: el paso 3 funciona y el pedido queda CONFIRMADO"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Falla y compensación",
+      "items": [
+        "Falla el paso 3 después de reservar y cobrar",
+        "Se compensa en orden inverso: reembolsar y luego liberar"
+      ]
+    },
+    {
+      "dot": "amber",
+      "title": "Estado final",
+      "items": [
+        "Pedido CANCELADO, pago REEMBOLSADO, reserva liberada",
+        "Sin rollback global: son operaciones nuevas de negocio"
+      ]
+    }
+  ]
+}
